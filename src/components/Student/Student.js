@@ -7,6 +7,7 @@ export default class Student extends Component {
     this.state = {
       studentInfo: {},
     };
+    this.goBack = this.goBack.bind(this);
   }
   componentDidMount() {
     let id = ((this.props.match || {}).params || {}).id;
@@ -26,6 +27,9 @@ export default class Student extends Component {
         });
     }
   }
+  goBack() {
+    this.props.history.goBack();
+  }
   render() {
     let { first_name, last_name, grade, email } = this.state.studentInfo || {};
     return (
@@ -36,6 +40,7 @@ export default class Student extends Component {
         </h1>
         <h3>Grade: {grade}</h3>
         <h3>Email: {email}</h3>
+        <button onClick={this.goBack}>back</button>
       </div>
     );
   }

@@ -7,9 +7,11 @@ import Student from "../Student/Student";
 export default class ClassList extends Component {
   constructor() {
     super();
+    this.previous;
     this.state = {
       students: [],
     };
+    this.goBack = this.goBack.bind(this);
   }
   getStudents() {
     let { params } = this.props.match;
@@ -23,6 +25,9 @@ export default class ClassList extends Component {
         this.setState({ students: response.data });
       });
     }
+  }
+  goBack() {
+    this.props.history.goBack();
   }
   componentDidMount() {
     this.getStudents();
@@ -42,6 +47,7 @@ export default class ClassList extends Component {
             </Link>
           );
         })}
+        <button onClick={this.goBack}>Back </button>
       </div>
     );
   }
